@@ -10,7 +10,7 @@ function RegistrarLectura({ pozo, volver }: Props) {
 
   const [pozos, setPozos] = useState<any[]>([]);
   const [pozoId, setPozoId] = useState(String(pozo.id));
-
+  
   const [mega1, setMega1] = useState('');
   const [mega2, setMega2] = useState('');
   const [mega3, setMega3] = useState('');

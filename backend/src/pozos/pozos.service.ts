@@ -1,26 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { PozosService } from './pozos.service';
 
-import { InjectRepository } from '@nestjs/typeorm';
-
-import { Repository } from 'typeorm';
-
-import { Pozo } from './entities/pozo.entity';
-
-@Injectable()
-
-export class PozosService {
+@Controller('pozos')
+export class PozosController {
 
   constructor(
-
-    @InjectRepository(Pozo)
-    private pozoRepository: Repository<Pozo>,
-
+    private readonly pozosService: PozosService,
   ) {}
 
-  findAll() {
-
-    return this.pozoRepository.find();
-
+  @Get()
+  listar() {
+    return this.pozosService.findAll();
   }
-
 }

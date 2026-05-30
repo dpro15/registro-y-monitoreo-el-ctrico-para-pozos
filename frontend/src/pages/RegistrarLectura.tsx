@@ -36,7 +36,7 @@ const obtenerPozos = async () => {
   try {
 
     const response = await axios.get(
-      'http://192.168.21.185:3000/pozos'
+      'https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/pozos'
     );
 
     setPozos(response.data);
@@ -54,7 +54,7 @@ const obtenerPozos = async () => {
     try {
 
       await axios.post(
-        'http://192.168.21.185:3000/lecturas',
+        'https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/lecturas',
         {
 
           usuario: {

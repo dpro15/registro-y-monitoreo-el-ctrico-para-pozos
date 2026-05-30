@@ -31,7 +31,7 @@
       try {
 
         const response = await axios.get(
-          'http://192.168.21.185:3000/lecturas'
+          'https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/lecturas'
         );
 
         setLecturas(response.data);
@@ -174,7 +174,7 @@
 
   try {
     await axios.delete(
-      `http://localhost:3000/lecturas/${id}`
+      `https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/lecturas/${id}`
     );
 
     obtenerLecturas();

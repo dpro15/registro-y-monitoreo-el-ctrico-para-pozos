@@ -11,7 +11,7 @@ function Login({ iniciar }: any) {
     try {
 
       const response = await axios.post(
-        'http://192.168.21.185:3000/usuarios/login',
+        'https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/usuarios/login',
         {
           nombre,
           contrasena,

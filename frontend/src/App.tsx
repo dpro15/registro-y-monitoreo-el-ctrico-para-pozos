@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Login from './pages/Login';
 import AdminHistorial from './AdminHistorial';
-import RegistrarLectura from './pages/RegistrarLectura';
+import Pozos from './pages/Pozos';
 
 function App() {
 
@@ -24,17 +24,25 @@ function App() {
 
   if (rol === 'ADMIN' || rol === 'SUPERVISOR') {
 
-  return <AdminHistorial />;
+    return <AdminHistorial />;
+
+  }
+
+  if (rol === 'ELECTRICISTA') {
+
+  return (
+    <Pozos
+      cerrarSesion={() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('rol');
+        setLogueado(false);
+      }}
+    />
+  );
 
 }
 
-if (rol === 'ELECTRICISTA') {
-
-  return <RegistrarLectura />;
-
-}
-
-  return <h1>Sin acceso</h1>;
+return <h1>Sin acceso</h1>;
 
 }
 

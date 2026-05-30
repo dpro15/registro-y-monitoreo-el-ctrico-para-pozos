@@ -156,6 +156,21 @@ const obtenerPozos = async () => {
         Salir
         </button>
 
+          <button
+  onClick={volver}
+  style={{
+    padding: 12,
+    borderRadius: 10,
+    border: 'none',
+    backgroundColor: '#2563eb',
+    color: 'white',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  }}
+>
+  Volver
+</button>
+
       <input
         placeholder="Megaohmios L1"
         value={mega1}

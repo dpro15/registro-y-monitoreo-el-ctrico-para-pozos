@@ -122,7 +122,9 @@
           
     (lectura) => ({
 
-      fecha: new Date(lectura.fecha).toLocaleString(),
+      fecha: new Date(
+        lectura.fecha
+      ).toLocaleDateString(),
 
       VL1: Number(lectura.voltaje_l1),
       VL2: Number(lectura.voltaje_l2),

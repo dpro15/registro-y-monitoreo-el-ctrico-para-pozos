@@ -52,9 +52,7 @@
 
       USUARIO: lectura.usuario?.nombre,
 
-      FECHA: new Date(
-        lectura.fecha
-      ).toLocaleString(),
+      fecha: new Date(lectura.fecha).toLocaleString(),
 
       VOLTAJE_L1: lectura.voltaje_l1,
       VOLTAJE_L2: lectura.voltaje_l2,
@@ -120,33 +118,28 @@
     return cumplePozo && cumpleFecha;
   });
 
-        const datosGrafico = [...lecturasFiltradas]
+        const datosGrafico = lecturasFiltradas.map(
+          
+    (lectura) => ({
 
-  .sort(
-    (a, b) =>
-      new Date(a.fecha).getTime() -
-      new Date(b.fecha).getTime()
-  )
+      fecha: new Date(
+        lectura.fecha
+      ).toLocaleDateString(),
 
-  .map((lectura) => ({
+      VL1: Number(lectura.voltaje_l1),
+      VL2: Number(lectura.voltaje_l2),
+      VL3: Number(lectura.voltaje_l3),
 
-    fecha: new Date(
-      lectura.fecha
-    ).toLocaleString(),
+      AL1: Number(lectura.amperaje_l1),
+      AL2: Number(lectura.amperaje_l2),
+      AL3: Number(lectura.amperaje_l3),
 
-    VL1: Number(lectura.voltaje_l1),
-    VL2: Number(lectura.voltaje_l2),
-    VL3: Number(lectura.voltaje_l3),
+      ML1: Number(lectura.megaohmios_l1),
+      ML2: Number(lectura.megaohmios_l2),
+      ML3: Number(lectura.megaohmios_l3),
 
-    AL1: Number(lectura.amperaje_l1),
-    AL2: Number(lectura.amperaje_l2),
-    AL3: Number(lectura.amperaje_l3),
-
-    ML1: Number(lectura.megaohmios_l1),
-    ML2: Number(lectura.megaohmios_l2),
-    ML3: Number(lectura.megaohmios_l3),
-
-  }));
+    })
+  );
 
   console.log(datosGrafico);
 

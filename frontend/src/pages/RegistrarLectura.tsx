@@ -11,6 +11,10 @@ function RegistrarLectura({ pozo, volver }: Props) {
   const [pozos, setPozos] = useState<any[]>([]);
   const [pozoId, setPozoId] = useState(String(pozo.id));
   
+  const regexMegaohmios = /^(?:[0-9]{2})\.[0-9]{2}$/;
+  const regexAmperaje = /^(?:[0-9]{2})\.[0-9]{2}$/;
+  const regexVoltaje = /^\d{3}$/;
+
   const [mega1, setMega1] = useState('');
   const [mega2, setMega2] = useState('');
   const [mega3, setMega3] = useState('');
@@ -51,10 +55,55 @@ const obtenerPozos = async () => {
   
   const guardarLectura = async () => {
 
-    try {
+  if (!regexMegaohmios.test(mega1)) {
+    alert('Megaohmios L1 debe tener formato 15.60');
+    return;
+  }
 
-      await axios.post(
-        'https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/lecturas',
+  if (!regexMegaohmios.test(mega2)) {
+    alert('Megaohmios L2 debe tener formato 15.60');
+    return;
+  }
+
+  if (!regexMegaohmios.test(mega3)) {
+    alert('Megaohmios L3 debe tener formato 15.60');
+    return;
+  }
+
+  if (!regexVoltaje.test(volt1)) {
+    alert('Voltaje L1 debe tener 3 dígitos');
+    return;
+  }
+
+  if (!regexVoltaje.test(volt2)) {
+    alert('Voltaje L2 debe tener 3 dígitos');
+    return;
+  }
+
+  if (!regexVoltaje.test(volt3)) {
+    alert('Voltaje L3 debe tener 3 dígitos');
+    return;
+  }
+
+  if (!regexAmperaje.test(amp1)) {
+    alert('Amperaje L1 debe tener formato 15.60');
+    return;
+  }
+
+  if (!regexAmperaje.test(amp2)) {
+    alert('Amperaje L2 debe tener formato 15.60');
+    return;
+  }
+
+  if (!regexAmperaje.test(amp3)) {
+    alert('Amperaje L3 debe tener formato 15.60');
+    return;
+  }
+
+  try {
+
+    await axios.post(
+      'https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/lecturas',
         {
 
           usuario: {

@@ -13,19 +13,24 @@
 //  }
 //}
 
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { PozosService } from './pozos.service';
+import { Pozo } from './entities/pozo.entity';
 
 @Controller('pozos')
 export class PozosController {
 
+  constructor(
+    private readonly pozosService: PozosService,
+  ) {}
+
+  @Post()
+  crear(@Body() pozo: Pozo) {
+    return this.pozosService.crear(pozo);
+  }
+
   @Get()
   listar() {
-    return [
-      {
-        id: 999,
-        nombre: 'PRUEBA DIEGO'
-      }
-    ];
+    return this.pozosService.findAll();
   }
 }

@@ -11,8 +11,8 @@ function RegistrarLectura({ pozo, volver }: Props) {
   const [pozos, setPozos] = useState<any[]>([]);
   const [pozoId, setPozoId] = useState(String(pozo.id));
   
-  const regexMegaohmios = /^(?:[0-9]{2})\.[0-9]{2}$/;
-  const regexAmperaje = /^(?:[0-9]{2})\.[0-9]{2}$/;
+  const regexMegaohmios = /^(\d|[1-9]\d)\.\d{2}$/;
+  const regexAmperaje = /^(\d|[1-9]\d)\.\d{2}$/;
   const regexVoltaje = /^\d{3}$/;
 
   const [mega1, setMega1] = useState('');

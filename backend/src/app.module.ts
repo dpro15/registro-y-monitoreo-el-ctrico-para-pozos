@@ -26,12 +26,12 @@ import { LecturasModule } from './lecturas/lecturas.module';
   synchronize: true,
 }),
 
-    UsuariosModule,
-    PozosModule,
-    LecturasModule,
+UsuariosModule,
+  PozosModule,
+   LecturasModule,
   ],
 
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {}//

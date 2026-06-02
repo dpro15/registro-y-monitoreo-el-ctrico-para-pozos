@@ -107,7 +107,7 @@ const obtenerPozos = async () => {
         {
 
           usuario: {
-            id: 1
+          id: Number(localStorage.getItem('usuarioId'))
           },
 
           pozo: {

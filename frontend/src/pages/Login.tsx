@@ -20,15 +20,11 @@ function Login({ iniciar }: any) {
 
       if(response.data) {
 
-  localStorage.setItem(
-    'token',
-    response.data.token
-  );
+  localStorage.setItem( 'token', response.data.token);
 
-localStorage.setItem(
-  'rol',
-  response.data.usuario.rol
-);
+  localStorage.setItem( 'rol', response.data.usuario.rol);
+
+  localStorage.setItem( 'usuarioId', response.data.usuario.id.toString());
 
   iniciar();
 

@@ -11,8 +11,8 @@ function RegistrarLectura({ pozo, volver }: Props) {
   const [pozos, setPozos] = useState<any[]>([]);
   const [pozoId, setPozoId] = useState(String(pozo.id));
   
-  const regexMegaohmios = /^(\d|[1-9]\d)\.\d{2}$/;
-  const regexAmperaje = /^(\d|[1-9]\d)\.\d{2}$/;
+  const regexMegaohmios = /^(?:\d{1,3})\.\d$/;
+  const regexAmperaje = /^(?:\d{1,3})\.\d$/;
   const regexVoltaje = /^\d{3}$/;
 
   const [mega1, setMega1] = useState('');
@@ -56,17 +56,17 @@ const obtenerPozos = async () => {
   const guardarLectura = async () => {
 
   if (!regexMegaohmios.test(mega1)) {
-    alert('Megaohmios L1 debe tener formato 15.60');
+    alert('Megaohmios L1 debe tener 1 decimal');
     return;
   }
 
   if (!regexMegaohmios.test(mega2)) {
-    alert('Megaohmios L2 debe tener formato 15.60');
+    alert('Megaohmios L2 debe tener 1 decimal');
     return;
   }
 
   if (!regexMegaohmios.test(mega3)) {
-    alert('Megaohmios L3 debe tener formato 15.60');
+    alert('Megaohmios L3 debe tener 1 decimal');
     return;
   }
 
@@ -86,17 +86,17 @@ const obtenerPozos = async () => {
   }
 
   if (!regexAmperaje.test(amp1)) {
-    alert('Amperaje L1 debe tener formato 15.60');
+    alert('Amperaje L1 debe tener 1 decimal');
     return;
   }
 
   if (!regexAmperaje.test(amp2)) {
-    alert('Amperaje L2 debe tener formato 15.60');
+    alert('Amperaje L2 debe tener 1 decimal');
     return;
   }
 
   if (!regexAmperaje.test(amp3)) {
-    alert('Amperaje L3 debe tener formato 15.60');
+    alert('Amperaje L3 debe tener 1 decimal');
     return;
   }
 

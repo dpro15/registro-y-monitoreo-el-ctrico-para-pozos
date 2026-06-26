@@ -26,6 +26,27 @@
 
     }, []);
 
+    const editarObservacion = async (lectura: any) => {
+
+    const nuevaObservacion = prompt(
+    'Editar observación',
+    lectura.observacion
+    );
+    if (nuevaObservacion === null) return;
+    try {
+      await axios.patch(
+      `https://registro-y-monitoreo-el-ctrico-para-pozos.onrender.com/lecturas/${lectura.id}/observacion`,
+        {
+          observacion: nuevaObservacion,
+        }
+      );
+      obtenerLecturas();
+    } catch (error) {
+      console.log(error);
+      alert('Error actualizando observación');
+      }
+    };
+
     const obtenerLecturas = async () => {
 
       try {
@@ -144,7 +165,7 @@
     ML2: Number(lectura.megaohmios_l2),
     ML3: Number(lectura.megaohmios_l3),
 
-  }));
+  }));  
 
   console.log(datosGrafico);
 
@@ -525,6 +546,8 @@
           <th style={estiloHeader}>MΩ L2</th>
           <th style={estiloHeader}>MΩ L3</th>
 
+          <th>LTS</th>
+
           <th style={estiloHeader}>ESTADO</th>
           <th style={estiloHeader}>ACCIONES</th>
 
@@ -593,6 +616,8 @@
                 {lectura.megaohmios_l3}
               </td>
 
+              <td style={estiloCelda}>{lectura.litros}</td>
+
               <td
                 style={{
                   ...estiloCelda,
@@ -600,38 +625,65 @@
                   fontWeight: 'bold',
 
                   color:
-                    lectura.observacion
+                    (lectura.observacion || '')
                       .toLowerCase()
                       .includes('bajo')
-                      ? 'red'
-                      : lectura.observacion
-                          .toLowerCase()
-                          .includes('excelente')
-                      ? 'green'
-                      : '#0f172a',
+                        ? 'red'
+                        : (lectura.observacion || '')
+                            .toLowerCase()
+                            .includes('excelente')
+                        ? 'green'
+                        : '#0f172a',
                 }}
-              >
-                {lectura.observacion}
+                                >
+                {lectura.observacion || '-'}
               </td>
 
               <td>
+
   {localStorage.getItem('rol') === 'ADMIN' && (
 
-  <button
-    onClick={() => eliminarLectura(lectura.id)}
-    style={{
-      backgroundColor: 'red',
-      color: 'white',
-      border: 'none',
-      padding: '8px 12px',
-      borderRadius: 8,
-      cursor: 'pointer',
-    }}
-  >
-    Eliminar
-  </button>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8,
+        alignItems: 'center',
+      }}
+    >
 
-)}
+      <button
+        onClick={() => editarObservacion(lectura)}
+        style={{
+          backgroundColor: '#2563eb',
+          color: 'white',
+          border: 'none',
+          padding: '8px 12px',
+          borderRadius: 8,
+          cursor: 'pointer',
+        }}
+      >
+        Editar
+      </button>
+
+      <button
+        onClick={() => eliminarLectura(lectura.id)}
+        style={{
+          backgroundColor: 'red',
+          color: 'white',
+          border: 'none',
+          padding: '8px 12px',
+          borderRadius: 8,
+          cursor: 'pointer',
+        }}
+      >
+        Eliminar
+      </button>
+
+    </div>
+
+  )}
+
 </td>
 
             </tr>

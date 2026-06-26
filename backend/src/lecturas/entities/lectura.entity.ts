@@ -49,6 +49,9 @@ export class Lectura {
   amperaje_l3!: number;
 
   @Column()
+  litros!: number;
+
+  @Column()
   observacion!: string;
 
   @Column({

@@ -18,6 +18,16 @@ export class LecturasService {
     return await this.lecturaRepository.save(lectura);
 
   }
+    async editarObservacion(id: number, observacion: string) {
+    const lectura = await this.lecturaRepository.findOne({
+      where: { id }
+    });
+    if (!lectura) {
+      throw new Error('Lectura no encontrada');
+    }
+    lectura.observacion = observacion;
+    return await this.lecturaRepository.save(lectura);
+  }
 
   async listar() {
 

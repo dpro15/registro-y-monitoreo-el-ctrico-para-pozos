@@ -11,7 +11,7 @@ function RegistrarLectura({ pozo, volver }: Props) {
   const [pozos, setPozos] = useState<any[]>([]);
   const [pozoId, setPozoId] = useState(String(pozo.id));
   
-  const regexMegaohmios = /^(?:\d{1,3})\.\d$/;
+  const regexMegaohmios = /^\d{1,4}\.\d$/;
   const regexAmperaje = /^(?:\d{1,3})\.\d$/;
   const regexVoltaje = /^\d{3}$/;
 
@@ -26,6 +26,10 @@ function RegistrarLectura({ pozo, volver }: Props) {
   const [amp1, setAmp1] = useState('');
   const [amp2, setAmp2] = useState('');
   const [amp3, setAmp3] = useState('');
+
+  const regexLitros = /^(?:\d{1,2}|\d{3})\.\d$/;
+
+  const [litros, setLitros] = useState('');
 
   const [observacion, setObservacion] = useState('');
   
@@ -54,21 +58,6 @@ const obtenerPozos = async () => {
 };
   
   const guardarLectura = async () => {
-
-  if (!regexMegaohmios.test(mega1)) {
-    alert('Megaohmios L1 debe tener 1 decimal');
-    return;
-  }
-
-  if (!regexMegaohmios.test(mega2)) {
-    alert('Megaohmios L2 debe tener 1 decimal');
-    return;
-  }
-
-  if (!regexMegaohmios.test(mega3)) {
-    alert('Megaohmios L3 debe tener 1 decimal');
-    return;
-  }
 
   if (!regexVoltaje.test(volt1)) {
     alert('Voltaje L1 debe tener 3 dígitos');
@@ -100,6 +89,41 @@ const obtenerPozos = async () => {
     return;
   }
 
+  if (!regexMegaohmios.test(mega1)) {
+    alert('Megaohmios L1 debe tener 1 decimal');
+    return;
+  }
+  if (Number(mega1) < 0 || Number(mega1) > 9999.9) {
+  alert('Megaohmios L1 debe estar entre 0.0 y 9999.9');
+  return;
+  }
+
+  if (!regexMegaohmios.test(mega2)) {
+    alert('Megaohmios L2 debe tener 1 decimal');
+    return;
+  }if (Number(mega2) < 0 || Number(mega2) > 9999.9) {
+  alert('Megaohmios L2 debe estar entre 0.0 y 9999.9');
+  return;
+  }
+
+  if (!regexMegaohmios.test(mega3)) {
+    alert('Megaohmios L3 debe tener 1 decimal');
+    return;
+  }
+  if (Number(mega3) < 0 || Number(mega3) > 9999.9) {
+  alert('Megaohmios L3 debe estar entre 0.0 y 9999.9');
+  return;
+  }
+
+  if (
+  !regexLitros.test(litros) ||
+  Number(litros) < 0 ||
+  Number(litros) > 999.9
+  ) {
+  alert('Los litros deben estar entre 0.0 y 999.9');
+  return;
+  }
+
   try {
 
     await axios.post(
@@ -126,11 +150,15 @@ const obtenerPozos = async () => {
           amperaje_l2: amp2,
           amperaje_l3: amp3,
 
+          litros,
+
           observacion,
         }
       );
 
       alert('Lectura guardada');
+
+      volver();
 
     } catch(error) {
 
@@ -221,24 +249,6 @@ const obtenerPozos = async () => {
 </button>
 
       <input
-        placeholder="Megaohmios L1"
-        value={mega1}
-        onChange={(e) => setMega1(e.target.value)}
-      />
-
-      <input
-        placeholder="Megaohmios L2"
-        value={mega2}
-        onChange={(e) => setMega2(e.target.value)}
-      />
-
-      <input
-        placeholder="Megaohmios L3"
-        value={mega3}
-        onChange={(e) => setMega3(e.target.value)}
-      />
-
-      <input
         placeholder="Voltaje L1"
         value={volt1}
         onChange={(e) => setVolt1(e.target.value)}
@@ -272,6 +282,30 @@ const obtenerPozos = async () => {
         placeholder="Amperaje L3"
         value={amp3}
         onChange={(e) => setAmp3(e.target.value)}
+      />
+      
+      <input
+        placeholder="Megaohmios L1"
+        value={mega1}
+        onChange={(e) => setMega1(e.target.value)}
+      />
+
+      <input
+        placeholder="Megaohmios L2"
+        value={mega2}
+        onChange={(e) => setMega2(e.target.value)}
+      />
+
+      <input
+        placeholder="Megaohmios L3"
+        value={mega3}
+        onChange={(e) => setMega3(e.target.value)}
+      />
+
+      <input
+      placeholder="Litros"
+      value={litros}
+      onChange={(e) => setLitros(e.target.value)}
       />
 
       <textarea

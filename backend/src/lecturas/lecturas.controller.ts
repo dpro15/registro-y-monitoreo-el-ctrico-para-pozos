@@ -1,9 +1,8 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 
-import {
-  Delete,
-  Param,
-} from '@nestjs/common';
+import { Patch } from '@nestjs/common';
+
+import { Delete, Param, } from '@nestjs/common';
 
 import { LecturasService } from './lecturas.service';
 
@@ -30,4 +29,13 @@ eliminar(@Param('id') id: string) {
   listar() {
     return this.lecturasService.listar();
   }
+
+  @Patch(':id/observacion')
+  editarObservacion(
+  @Param('id') id: number,
+  @Body() body: { observacion: string },
+  ) {
+  return this.lecturasService.editarObservacion(id, body.observacion);
+  }
+  
 }

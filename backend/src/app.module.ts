@@ -12,26 +12,30 @@ import { LecturasModule } from './lecturas/lecturas.module';
   imports: [
 
     TypeOrmModule.forRoot({
-  type: 'postgres',
+      type: 'postgres',
 
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
 
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
 
-  database: process.env.DB_NAME,
+      database: process.env.DB_NAME,
 
-  autoLoadEntities: true,
-  synchronize: true,
-}),
+      ssl: {
+        rejectUnauthorized: false,
+      },
 
-UsuariosModule,
-  PozosModule,
-   LecturasModule,
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+
+    UsuariosModule,
+    PozosModule,
+    LecturasModule,
   ],
 
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}//
+export class AppModule {}

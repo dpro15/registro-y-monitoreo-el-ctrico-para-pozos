@@ -48,8 +48,14 @@ export class Lectura {
   @Column('decimal')
   amperaje_l3!: number;
 
-  @Column()
-  litros!: number;
+  @Column({
+  type: 'decimal',
+  precision: 4,
+  scale: 1,
+  nullable: true,
+  default: 0,
+  })
+  litros?: number;
 
   @Column()
   observacion!: string;
